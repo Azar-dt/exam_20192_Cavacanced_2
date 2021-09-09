@@ -41,11 +41,15 @@ void DFS(Graph g, string u,st_map& visited,map<int,set<pair<int,string>>> &set_c
 }
 
 double Dijkstra(Graph g, string start, string end) { 
-    // tao min_heap
+    // check condition 
     if (start == end) return -1; 
     Graph :: iterator g_end =  g.end(); 
     if(g.find(start)==g_end || g.find(end)==g_end) return -1; 
+    for(auto x:g[start]) { 
+        if(x.first == end) return -1; 
+    }
 
+    // tao min_heap    
     priority_queue <ipair, vector<ipair> , greater<ipair>> pq; 
     map <string, string> prev; 
     map <string, double> dist; 
@@ -77,13 +81,7 @@ double Dijkstra(Graph g, string start, string end) {
         }
     }
     if (kt == false ) return -1 ;  
-    double distance = 0; 
-    string temp = end; 
-    while (prev[temp]!="") { 
-        distance ++; 
-        temp = prev[temp]; 
-    }
-    return distance; 
+    return 1; 
 }
 
 void Prim_mst(Graph g) { 
